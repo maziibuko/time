@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color-Changing Timer</title>
+    <style>
+        body {
+            transition: background-color 1s ease;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    function updateColor() {
+        var currentTime = new Date();
+        var endTime = new Date("December 31, 2023 23:59:59"); // Замените на дату окончания таймера
+
+        var timeDiff = endTime - currentTime;
+        var secondsRemaining = Math.floor(timeDiff / 1000);
+
+        // Выберите процент времени, при котором цвет начнет меняться (например, 10%)
+        var thresholdPercentage = 0.1;
+
+        // Вычисляем время, при котором цвет начнет меняться
+        var thresholdTime = Math.floor(secondsRemaining * thresholdPercentage);
+
+        // Определяем текущий цвет в зависимости от оставшегося времени
+        var red = Math.floor((thresholdTime - secondsRemaining) / thresholdTime * 255);
+        var green = 255 - red;
+
+        // Применяем цвет к фону страницы
+        document.body.style.backgroundColor = "rgb(" + red + "," + green + ",0)";
+
+        // Обновляем цвет каждую секунду
+        setTimeout(updateColor, 1000);
+    }
+
+    // Запускаем функцию при загрузке страницы
+    window.onload = updateColor;
+</script>
+
+</body>
+</html>
